@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_21_181904) do
+ActiveRecord::Schema.define(version: 2021_01_21_171826) do
 
   create_table "cards", force: :cascade do |t|
     t.string "card_type"
@@ -22,7 +22,6 @@ ActiveRecord::Schema.define(version: 2021_01_21_181904) do
     t.string "desc"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "card_value"
   end
 
 end
