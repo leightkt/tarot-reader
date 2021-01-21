@@ -2,6 +2,7 @@ require 'rest-client'
 require 'json'
 
 Card.destroy_all
+User.destroy_all
 
 response = RestClient.get 'https://rws-cards-api.herokuapp.com/api/v1/cards'
 result = JSON.parse response
@@ -17,3 +18,6 @@ cards.map do |card|
         desc: card["desc"],
     )
 end
+
+kat = User.create(user_name: "KitKat", user_password: "pw", name: "Kat", zodiac_sign: "Aries")
+jaime = User.create(user_name: "JJ", user_password: "123", name: "Jaime", zodiac_sign: "Aquarious")

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_21_171826) do
+ActiveRecord::Schema.define(version: 2021_01_21_225727) do
 
   create_table "cards", force: :cascade do |t|
     t.string "card_type"
@@ -20,6 +20,15 @@ ActiveRecord::Schema.define(version: 2021_01_21_171826) do
     t.string "meaning_up"
     t.string "meaning_rev"
     t.string "desc"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "user_name"
+    t.string "user_password"
+    t.string "name"
+    t.string "zodiac_sign"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
