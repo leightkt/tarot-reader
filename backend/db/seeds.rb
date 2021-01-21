@@ -14,6 +14,7 @@ cards.map do |card|
         suit: card["suit"],
         meaning_up: card["meaning_up"],
         meaning_rev: card["meaning_rev"],
-        desc: card["desc"]
+        desc: card["desc"],
+        card_value: card["value_int"]
     )
 end
