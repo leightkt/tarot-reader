@@ -6,6 +6,7 @@ Card.destroy_all
 response = RestClient.get 'https://rws-cards-api.herokuapp.com/api/v1/cards'
 result = JSON.parse response
 cards = result["cards"]
+count = 1
 cards.map do |card|
     Card.create(
         card_type: card["type"],
@@ -15,6 +16,7 @@ cards.map do |card|
         meaning_up: card["meaning_up"],
         meaning_rev: card["meaning_rev"],
         desc: card["desc"],
-        card_value: card["value_int"]
+        card_value: count
     )
+    count += 1
 end
