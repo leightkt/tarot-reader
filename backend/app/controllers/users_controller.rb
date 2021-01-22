@@ -9,10 +9,10 @@ class UsersController < ApplicationController
         @user = User.create(
             user_name: params[:username],
             user_password: params[:password],
-            name: params[:name],
+            name: params[:real_name],
             zodiac_sign: params[:sign]
         )
-        render json: @user
+        redirect_to "http://localhost:3000/showUser.html?username=#{@user.user_name}&password=#{@user.user_password}"
     end
 
     def show
@@ -20,13 +20,18 @@ class UsersController < ApplicationController
         render json: @user
     end
 
-    def find_user
+    def login
         @user = User.where("user_name = ? AND user_password = ?", params[:username], params[:password])
         if @user.any?
             render json: @user
         else
             render json: "User not found"
         end
+    end
+
+    def find_user
+        @user = User.find_by(user_name: params[:username])
+        render json: @user
     end
 
     def update
