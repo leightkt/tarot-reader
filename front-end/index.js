@@ -14,10 +14,28 @@ if (password && username){
 function fetchIt(){
     fetch(loginURL)
     .then(response => response.json())
-    .then(user => console.log(user))
+    .then(user => {
+        console.log(user)
+        hideLogin()
+        displayUserInfo(user[0])
+    })
     .catch(noUser)
 }
 
 function noUser(){
     alert("Invalid Username or Password")
+}
+
+function hideLogin(){
+    const $loginForm = document.querySelector('#login-form')
+    $loginForm.classList.add("hidden")
+}
+
+function displayUserInfo(user){
+    const $userSection = document.querySelector("#user-info")
+    $userSection.classList.remove("hidden")
+    const $userName = document.querySelector("#user-name")
+    const $userSign = document.querySelector("#user-sign")
+    $userName.innerHTML = `Welcome ${user.name}`
+    $userSign.innerHTML = `Your sign: ${user.zodiac_sign}`
 }

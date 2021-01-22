@@ -1,7 +1,6 @@
 const backendURL = 'http://localhost:9000/'
 const $cardsDisplay = document.querySelector(".cards-display")
 
-
 fetch(backendURL + 'reading')
     .then(response => response.json())
     .then(cards => {

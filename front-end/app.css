@@ -83,3 +83,7 @@ h1 {
     font-size: 2rem;
     padding-bottom: 1rem;
 }
+
+.hidden {
+    display: none;
+}
