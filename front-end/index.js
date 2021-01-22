@@ -15,5 +15,9 @@ function fetchIt(){
     fetch(loginURL)
     .then(response => response.json())
     .then(user => console.log(user))
+    .catch(noUser)
 }
 
+function noUser(){
+    alert("Invalid Username or Password")
+}
