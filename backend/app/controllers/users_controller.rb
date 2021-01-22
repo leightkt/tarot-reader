@@ -20,6 +20,15 @@ class UsersController < ApplicationController
         render json: @user
     end
 
+    def find_user
+        @user = User.where("user_name = ? AND user_password = ?", params[:username], params[:password])
+        if @user.any?
+            render json: @user
+        else
+            render json: "User not found"
+        end
+    end
+
     def update
         @user = User.find(params[:id])
         if params[:username]
