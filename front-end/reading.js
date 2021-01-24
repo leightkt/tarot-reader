@@ -1,6 +1,7 @@
 const backendURL = 'http://localhost:9000/'
 const $cardsDisplay = document.querySelector(".cards-display")
 const $singleCardDisplay = document.querySelector("#single-card-display")
+const $backButtonLink = document.querySelector('#back-button')
 const queryParams = new URLSearchParams(window.location.search)
 const userID = queryParams.get('id')
 const cardMeanings = []
@@ -9,11 +10,13 @@ fetch(backendURL + 'reading')
     .then(response => response.json())
     .then(cards => {
         displayCards(cards)
+
     })
 
 function displayCards(cards){
     cards.forEach(card => {
         appendCard(createCard(card))
+        addIDtoBackButtonLink()
     })
 }
 
@@ -101,4 +104,8 @@ function addReverseClick(card, $cardContainer){
         this.remove()
         toggleDisplayClass($cardsDisplay)
     })
+}
+
+function addIDtoBackButtonLink(){
+    $backButtonLink.href = `showUser.html?id=${userID}`
 }

@@ -3,8 +3,24 @@ const username = queryParams.get('username')
 const password = queryParams.get('password')
 const backendURL = 'http://localhost:9000/'
 let loginURL = `${backendURL}/login?username=${username}&password=${password}`
-let userID = null
-fetchUser()
+let userID = queryParams.get('id')
+console.log(userID)
+
+if (username && password) {
+    fetchUser()
+} else if (userID) {
+    showUser()
+}
+
+function showUser(){
+    fetch(backendURL + `users/${userID}`)
+    .then(response => response.json())
+    .then(user => {
+        displayUserInfo(user)
+        setReadingButtonAttr()
+    })
+}
+
 function fetchUser(){
     fetch(loginURL)
     .then(response => response.json())

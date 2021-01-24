@@ -3,6 +3,7 @@ let loginURL = `${backendURL}/login`
 const $loginForm = document.querySelector('#login-form')
 const $newHereButton = document.querySelector("#new-here")
 const $newUserFrom = document.querySelector("#new-user-form")
+const $backButton = document.querySelector('#back-button')
 
 
 function hideLogin(){
@@ -17,6 +18,7 @@ $newHereButton.addEventListener('click', function(){
     hideLogin()
     toggleDisplayClass($newUserFrom)
     toggleDisplayClass($newHereButton)
+    toggleDisplayClass($backButton)
 })
 
 
