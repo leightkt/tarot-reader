@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_21_225727) do
+ActiveRecord::Schema.define(version: 2021_01_24_181621) do
 
   create_table "cards", force: :cascade do |t|
     t.string "card_type"
@@ -24,6 +24,15 @@ ActiveRecord::Schema.define(version: 2021_01_21_225727) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "favorites", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "card_ids"
+    t.string "question"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_favorites_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "user_name"
     t.string "user_password"
@@ -33,4 +42,5 @@ ActiveRecord::Schema.define(version: 2021_01_21_225727) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "favorites", "users"
 end

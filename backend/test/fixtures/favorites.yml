@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  card_1: one
+  card_1_dir: MyString
+  string: MyString
+  card_2: one
+  card_2_dir: MyString
+  string: MyString
+  card_3: one
+  card_3_dir: 
+
+two:
+  user: two
+  card_1: two
+  card_1_dir: MyString
+  string: MyString
+  card_2: two
+  card_2_dir: MyString
+  string: MyString
+  card_3: two
+  card_3_dir: 

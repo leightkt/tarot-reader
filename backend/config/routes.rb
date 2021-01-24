@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :favorites
   resources :users
   resources :cards, only: [:index, :show]
   get "/reading", to: "cards#reading"
