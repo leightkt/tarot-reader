@@ -67,6 +67,18 @@ h1 {
     flex-wrap: wrap;
 }
 
+.single-card-display {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.description {
+    display: flex;
+    flex-wrap: column;
+    width: 20rem;
+    margin: 2rem;
+}
+
 .tarot-card {
     height: 35rem;
     display: flex;

@@ -88,7 +88,7 @@ function renderSingleCard(card){
 function renderCardDescription(card){
     const $descriptionContainer = document.createElement('div')
     $descriptionContainer.classList.add('description')
-    const $cardDescription = document.createElement('h4')
+    const $cardDescription = document.createElement('p')
     $cardDescription.innerText = card.desc
     $descriptionContainer.appendChild($cardDescription)
     return $descriptionContainer
@@ -184,7 +184,8 @@ $readingButton.addEventListener('click', function(){
 })
 
 function prependQuestion(){
+    $questionDiv = document.querySelector('#question-display')
     $userQuestion = document.createElement('h2')
     $userQuestion.innerText = `You asked: ${userQuestion}`
-    $cardsDisplay.prepend($userQuestion)
+    $questionDiv.append($userQuestion)
 }

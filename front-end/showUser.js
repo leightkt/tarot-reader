@@ -55,14 +55,14 @@ function displayFavReadings(favorite){
     const $readingContainer = document.createElement('div')
     $readingContainer.id = favorite.id
     $readingContainer.classList.add('reading-box')
-    const $readingDate = document.createElement('h3')
+    const $readingDate = document.createElement('h4')
     $readingDate.innerText = getDate(favorite.created_at)
     const $readingLink = document.createElement('a')
     $readingLink.href = `/showFavorite.html?favid=${favorite.id}&id=${userID}`
-    const $readingQuestion = document.createElement('p')
+    const $readingQuestion = document.createElement('h3')
     $readingQuestion.innerText = favorite.question
     $readingLink.append($readingDate)
-    $readingContainer.append($readingLink, $readingQuestion)
+    $readingContainer.append($readingQuestion, $readingLink)
     $favoritesContainer.append($readingContainer)
 }
 
