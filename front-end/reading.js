@@ -2,6 +2,7 @@ const backendURL = 'http://localhost:9000/'
 const $cardsDisplay = document.querySelector(".cards-display")
 const $singleCardDisplay = document.querySelector("#single-card-display")
 const $backButtonLink = document.querySelector('#back-button')
+const $saveButton = document.querySelector('#save')
 const queryParams = new URLSearchParams(window.location.search)
 const userID = queryParams.get('id')
 const cardMeanings = []
@@ -10,7 +11,6 @@ fetch(backendURL + 'reading')
     .then(response => response.json())
     .then(cards => {
         displayCards(cards)
-
     })
 
 function displayCards(cards){
@@ -65,6 +65,7 @@ function fetchCard(id){
     .then(response => response.json())
     .then(card => {
         appendViewCard(renderSingleCard(card))
+        appendViewCard(renderCardDescription(card))
     })
 }
 
@@ -78,6 +79,15 @@ function renderSingleCard(card){
     addReverseClick(card, $cardContainer)
     $cardContainer.append($cardName, $cardMeaning)
     return $cardContainer
+}
+
+function renderCardDescription(card){
+    const $descriptionContainer = document.createElement('div')
+    $descriptionContainer.classList.add('description')
+    const $cardDescription = document.createElement('h4')
+    $cardDescription.innerText = card.desc
+    $descriptionContainer.appendChild($cardDescription)
+    return $descriptionContainer
 }
 
 function renderMeaning(card){
@@ -95,13 +105,14 @@ function appendCard($cardContainer){
     $cardsDisplay.appendChild($cardContainer)
 }
 
-function appendViewCard($cardContainer){
-    $singleCardDisplay.appendChild($cardContainer)
+function appendViewCard(element){
+    $singleCardDisplay.appendChild(element)
 }
 
-function addReverseClick(card, $cardContainer){
+function addReverseClick(card, $cardContainer, $descriptionContainer){
     $cardContainer.addEventListener('click', function(){
         this.remove()
+        document.querySelector('.description').remove()
         toggleDisplayClass($cardsDisplay)
     })
 }
@@ -109,3 +120,52 @@ function addReverseClick(card, $cardContainer){
 function addIDtoBackButtonLink(){
     $backButtonLink.href = `showUser.html?id=${userID}`
 }
+
+function saveReading(){
+    const reading = {
+        user_id: userID,
+        card_ids: getCardIDs(),
+        card_directions: getCardDirections(),
+        question: null
+    }
+    saveFetch(reading)
+}
+
+function getCardIDs(){
+    let cardIDstring = ""
+    for (i = 0; i < cardMeanings.length; i++){
+        if (i === cardMeanings.length - 1){
+            cardIDstring += `${cardMeanings[i].ID}`
+        } else {
+            cardIDstring += `${cardMeanings[i].ID}, `
+        }
+    }
+    return cardIDstring
+}
+
+function getCardDirections(){
+    let cardDirectionString = ""
+    for (i = 0; i < cardMeanings.length; i++){
+        if (i === cardMeanings.length - 1){
+            cardDirectionString += `${cardMeanings[i].direction}`
+        } else {
+            cardDirectionString += `${cardMeanings[i].direction}, `
+        }
+    }
+    return cardDirectionString
+}
+
+function saveFetch(reading){
+    fetch('http://localhost:9000/favorites', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(reading)
+    })
+}
+
+$saveButton.addEventListener('click', function(){
+    saveReading()
+    window.location.replace(`http://localhost:3000/showUser.html?id=${userID}`)
+}, {once: true})

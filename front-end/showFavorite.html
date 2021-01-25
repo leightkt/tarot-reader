@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tarot Reader</title>
-    <script src="reading.js" defer></script>
+    <script src="showFavorite.js" defer></script>
     <link rel="stylesheet" href="app.css">
 </head>
 <body>
@@ -12,13 +12,16 @@
         <h1>Welcome to the Tarot Reader!</h1>
     </header>
     <main>
+        <section>
+            <h2 id="date"></h2>
+            <h3 id="question"></h2>
+        </section>
         <section class="cards-display"></section>
         <section id="single-card-display"></section>
     </main>
     <footer>
-        <p>Save this reading?</p>
-        <button id="save">Save</button>
-        <a href="" id="back-button"><button>Don't Save</button></a>
+        <button id="delete">Delete Reading</button>
+        <a href="" id="back-button"><button>Back</button></a>
     </footer>
 </body>
 </html>

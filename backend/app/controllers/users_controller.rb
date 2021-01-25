@@ -17,13 +17,13 @@ class UsersController < ApplicationController
 
     def show
         @user = User.find(params[:id])
-        render json: @user
+        render json: @user, include: :favorites
     end
 
     def login
         @user = User.where("user_name = ? AND user_password = ?", params[:username], params[:password])
         if @user.any?
-            render json: @user
+            render json: @user, include: :favorites
         else
             render json: "User not found"
         end
