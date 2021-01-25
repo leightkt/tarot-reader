@@ -3,15 +3,19 @@ const $cardsDisplay = document.querySelector(".cards-display")
 const $singleCardDisplay = document.querySelector("#single-card-display")
 const $backButtonLink = document.querySelector('#back-button')
 const $saveButton = document.querySelector('#save')
+const $readingButton = document.querySelector('#reading-button')
 const queryParams = new URLSearchParams(window.location.search)
 const userID = queryParams.get('id')
 const cardMeanings = []
+let userQuestion = ""
 
-fetch(backendURL + 'reading')
-    .then(response => response.json())
-    .then(cards => {
-        displayCards(cards)
-    })
+function fetchIt(){
+    fetch(backendURL + 'reading')
+        .then(response => response.json())
+        .then(cards => {
+            displayCards(cards)
+        })
+}
 
 function displayCards(cards){
     cards.forEach(card => {
@@ -126,7 +130,7 @@ function saveReading(){
         user_id: userID,
         card_ids: getCardIDs(),
         card_directions: getCardDirections(),
-        question: null
+        question: userQuestion
     }
     saveFetch(reading)
 }
@@ -167,5 +171,20 @@ function saveFetch(reading){
 
 $saveButton.addEventListener('click', function(){
     saveReading()
+    console.log("reading saved")
     window.location.replace(`http://localhost:3000/showUser.html?id=${userID}`)
 }, {once: true})
+
+$readingButton.addEventListener('click', function(){
+    userQuestion = document.getElementById('user-question').value
+    fetchIt()
+    toggleDisplayClass(document.querySelector('footer'))
+    toggleDisplayClass(document.querySelector('#question-form'))
+    prependQuestion()
+})
+
+function prependQuestion(){
+    $userQuestion = document.createElement('h2')
+    $userQuestion.innerText = `You asked: ${userQuestion}`
+    $cardsDisplay.prepend($userQuestion)
+}
